@@ -1,7 +1,31 @@
 import { ADD, EDIT, DELETE } from '../actions/appActions';
 
 const appReducer = (state = [], action) => {
-    return state;
-}
+    switch (action.type) {
+        case ADD:
+            return [...state, action.payload];
+        case EDIT:
+            return state.map(currentStateElement => {
+                if (currentStateElement.id !== action.payload.id) {
+                    return currentStateElement;
+                }
+
+                const { author, comment, rate } = action.payload;
+
+                return ({
+                    author,
+                    comment,
+                    id: currentStateElement.id,
+                    rate,
+                })
+            });
+        case DELETE:
+            return state.filter(currentStateElement => currentStateElement.id !== action.payload.id);
+
+        default:
+            console.error(`brak akcji typu: ${action.type}!`);
+            return state;
+    }
+};
 
 export default appReducer;
