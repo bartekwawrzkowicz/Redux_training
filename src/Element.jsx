@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Form from './Form';
 
-const Element = ({ author, comment,id,  rate}) => {
+const Element = ({ author, comment, id, rate}) => {
     const [isVisibleForm, setIsVisibleForm] = useState(false);
 
-    const toggleElements = () => setIsVisibleForm(prevVisibility => !prevVisibility);
+    const toggleElements = () => setIsVisibleForm(prev => !prev);
 
     const formOrButtonElement = isVisibleForm ? (
         <Form callback={toggleElements} author={author} comment={comment} id={id} rate={rate} />
@@ -12,8 +12,7 @@ const Element = ({ author, comment,id,  rate}) => {
         <button onClick={toggleElements}>
             Edit Book
         </button>
-    )
-    
+    );
 
     return ( 
         <li>
@@ -23,6 +22,6 @@ const Element = ({ author, comment,id,  rate}) => {
             {formOrButtonElement}
         </li>
      );
-}
+};
  
 export default Element;
